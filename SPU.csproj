@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!--Project was exported from assembly: C:\Users\infinity-atom\Documents\SPU.exe-->
+  <PropertyGroup>
+    <LangVersion>8.0</LangVersion>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{BAC77696-4B3C-4891-AC74-A9E6667B446C}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AssemblyName>SPU</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <ApplicationVersion>2.0.0.0</ApplicationVersion>
+    <FileAlignment>512</FileAlignment>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>SPU.Program</StartupObject>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.DirectoryServices.AccountManagement" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Windows.Forms" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="SPU\ADUser.cs" />
+    <Compile Include="SPU\CredentialsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SPU\DirectoryEntryExtensions.cs" />
+    <Compile Include="SPU\UserPrincipalExtensions.cs" />
+    <Compile Include="SPU\MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SPU\Program.cs" />
+    <Compile Include="SPU\SplashScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SPU\Properties\Resources.cs" />
+    <Compile Include="SPU\Properties\Settings.cs" />
+    <Compile Include="SPU\Extensions\ObjectExtensions.cs" />
+    <Compile Include="ActiveDirectory\AD.cs" />
+    <Compile Include="Common\ActionExtensions.cs" />
+    <Compile Include="Common\Messages.cs" />
+    <Compile Include="Common\SPUException.cs" />
+    <Compile Include="Common\UserCredentials.cs" />
+    <Compile Include="AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SPU\CredentialsForm.resx" />
+    <EmbeddedResource Include="SPU\MainForm.resx" />
+    <EmbeddedResource Include="SPU\Properties\Resources.resx" />
+    <EmbeddedResource Include="SPU\SplashScreen.resx" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
