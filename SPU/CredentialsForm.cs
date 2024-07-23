@@ -239,7 +239,7 @@ namespace SPU
       this.FormBorderStyle = FormBorderStyle.FixedDialog;
       this.MaximizeBox = false;
       this.MinimizeBox = false;
-      this.Name = nameof (CredentialsForm);
+      this.Name = "CredentialsForm";
       this.StartPosition = FormStartPosition.CenterScreen;
       this.Text = "Student Password Utility";
       this.ResumeLayout(false);

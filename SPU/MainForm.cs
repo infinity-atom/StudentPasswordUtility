@@ -783,7 +783,7 @@ namespace SPU
       this.FormBorderStyle = FormBorderStyle.FixedDialog;
       this.MaximizeBox = false;
       this.MinimizeBox = false;
-      this.Name = nameof (MainForm);
+      this.Name = "MainForm";
       this.StartPosition = FormStartPosition.CenterScreen;
       this.Text = "Student Password Utility";
       this.Load += new EventHandler(this.MainForm_Load);

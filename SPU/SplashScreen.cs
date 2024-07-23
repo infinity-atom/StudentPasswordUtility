@@ -221,7 +221,7 @@ namespace SPU
       this.Controls.Add((Control) this.lblStatus);
       this.FormBorderStyle = FormBorderStyle.None;
       this.Icon = (Icon) componentResourceManager.GetObject("$this.Icon");
-      this.Name = nameof (SplashScreen);
+      this.Name = "SplashScreen";
       this.StartPosition = FormStartPosition.CenterScreen;
       this.Text = "Joiner";
       this.Load += new EventHandler(this.SplashScreen_Load);
