@@ -9,16 +9,16 @@ using System;
 #nullable disable
 namespace Common
 {
-  public class SPUException : Exception
-  {
-    public SPUException(string message)
-      : base(message)
+    public class SPUException : Exception
     {
-    }
+        public SPUException(string message)
+          : base(message)
+        {
+        }
 
-    public SPUException(string message, Exception innerException)
-      : base(message, innerException)
-    {
+        public SPUException(string message, Exception innerException)
+          : base(message, innerException)
+        {
+        }
     }
-  }
 }

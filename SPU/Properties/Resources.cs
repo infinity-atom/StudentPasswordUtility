@@ -15,39 +15,39 @@ using System.Runtime.CompilerServices;
 #nullable disable
 namespace SPU.Properties
 {
-  [GeneratedCode("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
-  [DebuggerNonUserCode]
-  [CompilerGenerated]
-  internal class Resources
-  {
-    private static ResourceManager resourceMan;
-    private static CultureInfo resourceCulture;
-
-    internal Resources()
+    [GeneratedCode("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [DebuggerNonUserCode]
+    [CompilerGenerated]
+    internal class Resources
     {
-    }
+        private static ResourceManager resourceMan;
+        private static CultureInfo resourceCulture;
 
-    [EditorBrowsable(EditorBrowsableState.Advanced)]
-    internal static ResourceManager ResourceManager
-    {
-      get
-      {
-        if (Resources.resourceMan == null)
-          Resources.resourceMan = new ResourceManager("SPU.Properties.Resources", typeof (SPU.Properties.Resources).Assembly);
-        return Resources.resourceMan;
-      }
-    }
+        internal Resources()
+        {
+        }
 
-    [EditorBrowsable(EditorBrowsableState.Advanced)]
-    internal static CultureInfo Culture
-    {
-      get => Resources.resourceCulture;
-      set => Resources.resourceCulture = value;
-    }
+        [EditorBrowsable(EditorBrowsableState.Advanced)]
+        internal static ResourceManager ResourceManager
+        {
+            get
+            {
+                if (Resources.resourceMan == null)
+                    Resources.resourceMan = new ResourceManager("SPU.Properties.Resources", typeof(SPU.Properties.Resources).Assembly);
+                return Resources.resourceMan;
+            }
+        }
 
-    internal static Icon SPU
-    {
-      get => (Icon) Resources.ResourceManager.GetObject(nameof (SPU), Resources.resourceCulture);
+        [EditorBrowsable(EditorBrowsableState.Advanced)]
+        internal static CultureInfo Culture
+        {
+            get => Resources.resourceCulture;
+            set => Resources.resourceCulture = value;
+        }
+
+        internal static Icon SPU
+        {
+            get => (Icon)Resources.ResourceManager.GetObject(nameof(SPU), Resources.resourceCulture);
+        }
     }
-  }
 }

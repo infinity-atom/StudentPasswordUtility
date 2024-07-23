@@ -11,12 +11,12 @@ using System.Runtime.CompilerServices;
 #nullable disable
 namespace SPU.Properties
 {
-  [CompilerGenerated]
-  [GeneratedCode("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "14.0.0.0")]
-  internal sealed class Settings : ApplicationSettingsBase
-  {
-    private static Settings defaultInstance = (Settings) SettingsBase.Synchronized((SettingsBase) new Settings());
+    [CompilerGenerated]
+    [GeneratedCode("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "14.0.0.0")]
+    internal sealed class Settings : ApplicationSettingsBase
+    {
+        private static Settings defaultInstance = (Settings)SettingsBase.Synchronized((SettingsBase)new Settings());
 
-    public static Settings Default => Settings.defaultInstance;
-  }
+        public static Settings Default => Settings.defaultInstance;
+    }
 }

@@ -10,17 +10,17 @@ using System.ComponentModel;
 #nullable disable
 namespace SPU.Extensions
 {
-  public static class ObjectExtensions
-  {
-    public static void InvokeEx<T>(this T @this, Action<T> action) where T : ISynchronizeInvoke
+    public static class ObjectExtensions
     {
-      if (@this.InvokeRequired)
-        @this.Invoke((Delegate) action, new object[1]
+        public static void InvokeEx<T>(this T @this, Action<T> action) where T : ISynchronizeInvoke
         {
+            if (@this.InvokeRequired)
+                @this.Invoke((Delegate)action, new object[1]
+                {
           (object) @this
-        });
-      else
-        action(@this);
+                });
+            else
+                action(@this);
+        }
     }
-  }
 }

@@ -12,47 +12,47 @@ using System.Windows.Forms;
 #nullable disable
 namespace Common
 {
-  public static class ActionExtensions
-  {
-    public static void InvokeInThread(this Action action)
+    public static class ActionExtensions
     {
-      Exception exception = (Exception) null;
-      Thread thread = new Thread((ThreadStart) (() => exception = ActionExtensions.InvokeAction(action)))
-      {
-        IsBackground = true
-      };
-      thread.Start();
-      while (thread.IsAlive)
-      {
-        Thread.Sleep(100);
-        Application.DoEvents();
-      }
-      if (exception != null)
-        throw exception;
-    }
-
-    private static Exception InvokeAction(Action action)
-    {
-      try
-      {
-        action();
-      }
-      catch (Exception ex)
-      {
-        return ex;
-      }
-      return (Exception) null;
-    }
-
-    public static void InvokeEx<T>(this T @this, Action<T> action) where T : ISynchronizeInvoke
-    {
-      if (@this.InvokeRequired)
-        @this.Invoke((Delegate) action, new object[1]
+        public static void InvokeInThread(this Action action)
         {
+            Exception exception = (Exception)null;
+            Thread thread = new Thread((ThreadStart)(() => exception = ActionExtensions.InvokeAction(action)))
+            {
+                IsBackground = true
+            };
+            thread.Start();
+            while (thread.IsAlive)
+            {
+                Thread.Sleep(100);
+                Application.DoEvents();
+            }
+            if (exception != null)
+                throw exception;
+        }
+
+        private static Exception InvokeAction(Action action)
+        {
+            try
+            {
+                action();
+            }
+            catch (Exception ex)
+            {
+                return ex;
+            }
+            return (Exception)null;
+        }
+
+        public static void InvokeEx<T>(this T @this, Action<T> action) where T : ISynchronizeInvoke
+        {
+            if (@this.InvokeRequired)
+                @this.Invoke((Delegate)action, new object[1]
+                {
           (object) @this
-        });
-      else
-        action(@this);
+                });
+            else
+                action(@this);
+        }
     }
-  }
 }

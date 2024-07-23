@@ -10,11 +10,11 @@ using System.DirectoryServices.AccountManagement;
 #nullable disable
 namespace SPU
 {
-  public static class UserPrincipalExtensions
-  {
-    public static bool IsStudent(this UserPrincipal userPrincipal)
+    public static class UserPrincipalExtensions
     {
-      return ((DirectoryEntry) userPrincipal.GetUnderlyingObject()).IsStudent();
+        public static bool IsStudent(this UserPrincipal userPrincipal)
+        {
+            return ((DirectoryEntry)userPrincipal.GetUnderlyingObject()).IsStudent();
+        }
     }
-  }
 }

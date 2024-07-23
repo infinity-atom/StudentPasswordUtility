@@ -15,92 +15,92 @@ using System.Windows.Forms;
 #nullable disable
 namespace SPU
 {
-  internal static class Program
-  {
-    [STAThread]
-    private static void Main()
+    internal static class Program
     {
-      Application.ThreadException += new ThreadExceptionEventHandler(Program.ThreadException_EventHandler);
-      Application.SetUnhandledExceptionMode(UnhandledExceptionMode.Automatic);
-      AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(Program.CurrentDomain_UnhandledException);
-      Application.EnableVisualStyles();
-      Application.SetCompatibleTextRenderingDefault(false);
-      if ((Control.ModifierKeys & Keys.Control) != Keys.None || !Program.IsDomainJoined() || !AD.IsValidDomain(Environment.UserDomainName))
-      {
-        using (CredentialsForm credentialsForm = new CredentialsForm())
+        [STAThread]
+        private static void Main()
         {
-          if (credentialsForm.ShowDialog() != DialogResult.OK)
-            Program.Quit(1);
-          Program.UserCredentials = new UserCredentials(credentialsForm.Domain, credentialsForm.Username, credentialsForm.Password);
+            Application.ThreadException += new ThreadExceptionEventHandler(Program.ThreadException_EventHandler);
+            Application.SetUnhandledExceptionMode(UnhandledExceptionMode.Automatic);
+            AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(Program.CurrentDomain_UnhandledException);
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            if ((Control.ModifierKeys & Keys.Control) != Keys.None || !Program.IsDomainJoined() || !AD.IsValidDomain(Environment.UserDomainName))
+            {
+                using (CredentialsForm credentialsForm = new CredentialsForm())
+                {
+                    if (credentialsForm.ShowDialog() != DialogResult.OK)
+                        Program.Quit(1);
+                    Program.UserCredentials = new UserCredentials(credentialsForm.Domain, credentialsForm.Username, credentialsForm.Password);
+                }
+            }
+            if (!Program.ValidUser())
+                Program.Quit("You are not permitted to execute this application");
+            Application.Run((Form)new MainForm());
         }
-      }
-      if (!Program.ValidUser())
-        Program.Quit("You are not permitted to execute this application");
-      Application.Run((Form) new MainForm());
-    }
 
-    public static UserCredentials UserCredentials { get; set; }
+        public static UserCredentials UserCredentials { get; set; }
 
-    private static bool ValidUser()
-    {
-      if (Program.UserCredentials == null)
-        return !UserPrincipal.Current.IsStudent();
-      UserPrincipal user = AD.FindUser(Program.UserCredentials.Domain, Program.UserCredentials.Username);
-      return user != null && !user.IsStudent();
-    }
-
-    private static void CurrentDomain_UnhandledException(
-      object sender,
-      UnhandledExceptionEventArgs e)
-    {
-      Program.UnhandledExceptionHandler(e.ExceptionObject);
-    }
-
-    private static void ThreadException_EventHandler(object sender, ThreadExceptionEventArgs t)
-    {
-      Program.UnhandledExceptionHandler((object) t.Exception);
-    }
-
-    private static void UnhandledExceptionHandler(object exception)
-    {
-      Program.Quit(exception != null ? (exception.GetType() != typeof (SPUException) ? string.Format("A critical error has occurred!\r\n\r\n{0}", (object) (Exception) exception) : ((Exception) exception).Message) : "An unknown error has occurred");
-    }
-
-    public static void Quit() => Program.Quit(0, (Exception) null, (string) null);
-
-    public static void Quit(int exitCode)
-    {
-      Program.Quit(exitCode, (Exception) null, (string) null);
-    }
-
-    public static void Quit(Exception exception) => Program.Quit(1, exception, (string) null);
-
-    public static void Quit(string errorMessage) => Program.Quit(1, (Exception) null, errorMessage);
-
-    public static void Quit(int exitCode, Exception exception, string errorMessage)
-    {
-      if (!string.IsNullOrEmpty(exception?.Message))
-        Messages.ShowError(exception.Message);
-      else if (!string.IsNullOrEmpty(errorMessage))
-        Messages.ShowError(errorMessage);
-      Environment.Exit(exitCode);
-    }
-
-    private static bool IsDomainJoined()
-    {
-      try
-      {
-        using (ManagementObject managementObject = new ManagementObject(string.Format("Win32_ComputerSystem.Name='{0}'", (object) Environment.MachineName)))
+        private static bool ValidUser()
         {
-          managementObject.Get();
-          object obj = managementObject["PartOfDomain"];
-          return obj != null && (bool) obj;
+            if (Program.UserCredentials == null)
+                return !UserPrincipal.Current.IsStudent();
+            UserPrincipal user = AD.FindUser(Program.UserCredentials.Domain, Program.UserCredentials.Username);
+            return user != null && !user.IsStudent();
         }
-      }
-      catch (SystemException ex)
-      {
-        return false;
-      }
+
+        private static void CurrentDomain_UnhandledException(
+          object sender,
+          UnhandledExceptionEventArgs e)
+        {
+            Program.UnhandledExceptionHandler(e.ExceptionObject);
+        }
+
+        private static void ThreadException_EventHandler(object sender, ThreadExceptionEventArgs t)
+        {
+            Program.UnhandledExceptionHandler((object)t.Exception);
+        }
+
+        private static void UnhandledExceptionHandler(object exception)
+        {
+            Program.Quit(exception != null ? (exception.GetType() != typeof(SPUException) ? string.Format("A critical error has occurred!\r\n\r\n{0}", (object)(Exception)exception) : ((Exception)exception).Message) : "An unknown error has occurred");
+        }
+
+        public static void Quit() => Program.Quit(0, (Exception)null, (string)null);
+
+        public static void Quit(int exitCode)
+        {
+            Program.Quit(exitCode, (Exception)null, (string)null);
+        }
+
+        public static void Quit(Exception exception) => Program.Quit(1, exception, (string)null);
+
+        public static void Quit(string errorMessage) => Program.Quit(1, (Exception)null, errorMessage);
+
+        public static void Quit(int exitCode, Exception exception, string errorMessage)
+        {
+            if (!string.IsNullOrEmpty(exception?.Message))
+                Messages.ShowError(exception.Message);
+            else if (!string.IsNullOrEmpty(errorMessage))
+                Messages.ShowError(errorMessage);
+            Environment.Exit(exitCode);
+        }
+
+        private static bool IsDomainJoined()
+        {
+            try
+            {
+                using (ManagementObject managementObject = new ManagementObject(string.Format("Win32_ComputerSystem.Name='{0}'", (object)Environment.MachineName)))
+                {
+                    managementObject.Get();
+                    object obj = managementObject["PartOfDomain"];
+                    return obj != null && (bool)obj;
+                }
+            }
+            catch (SystemException ex)
+            {
+                return false;
+            }
+        }
     }
-  }
 }

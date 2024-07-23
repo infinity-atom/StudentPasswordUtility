@@ -10,30 +10,30 @@ using System;
 #nullable disable
 namespace Common
 {
-  public class UserCredentials
-  {
-    public UserCredentials(string domain, string username, string password)
+    public class UserCredentials
     {
-      if (string.IsNullOrEmpty(domain))
-        throw new ArgumentNullException(domain);
-      if (string.IsNullOrEmpty(username))
-        throw new ArgumentNullException(username);
-      if (string.IsNullOrEmpty(password))
-        throw new ArgumentNullException(password);
-      this.Domain = AD.GetNETBIOS(domain);
-      this.Username = username.ToLower();
-      this.Password = password;
+        public UserCredentials(string domain, string username, string password)
+        {
+            if (string.IsNullOrEmpty(domain))
+                throw new ArgumentNullException(domain);
+            if (string.IsNullOrEmpty(username))
+                throw new ArgumentNullException(username);
+            if (string.IsNullOrEmpty(password))
+                throw new ArgumentNullException(password);
+            this.Domain = AD.GetNETBIOS(domain);
+            this.Username = username.ToLower();
+            this.Password = password;
+        }
+
+        public string DomainAndUser
+        {
+            get => string.Format("{0}\\{1}", (object)this.Domain, (object)this.Username);
+        }
+
+        public string Domain { get; }
+
+        public string Username { get; }
+
+        public string Password { get; }
     }
-
-    public string DomainAndUser
-    {
-      get => string.Format("{0}\\{1}", (object) this.Domain, (object) this.Username);
-    }
-
-    public string Domain { get; }
-
-    public string Username { get; }
-
-    public string Password { get; }
-  }
 }
